@@ -41,12 +41,24 @@ class MainActivity : AppCompatActivity() {
             view.visibility = View.GONE                 //makes the button invisible (the view in the parameter will represent the button in the onCreate fxn)
             nicknameTextView.visibility = View.VISIBLE  //shows the nickname input of user
 
+            var test_data:TextView
+            for(item in (0..24)){
+                test_data = findViewById<TextView>(getId(item))
+                test_data.visibility = View.VISIBLE
+            }
+
         }
         else{
-            nicknameTextView.text = getString(R.string.response)      //puts the nickname input of user to the nickname_text textView
+            nicknameTextView.text = getString(R.string.response)      //puts the error response input to the nickname_text textView if there is no input
             editText.visibility = View.GONE             //makes the nickname_edit invisible
             view.visibility = View.GONE                 //makes the button invisible (the view in the parameter will represent the button in the onCreate fxn)
             nicknameTextView.visibility = View.VISIBLE  //shows the nickname input of user
+
+            var test_data:TextView
+            for(item in (0..24)) {
+                test_data = findViewById<TextView>(getId(item))
+                test_data.visibility = View.VISIBLE
+            }
         }
 
 
@@ -72,6 +84,8 @@ class MainActivity : AppCompatActivity() {
         imm.showSoftInput(editText, 0)
 
     }
+
+
 
     //function for accessing each boxes
     private fun getId(int: Int): Int{
@@ -105,12 +119,25 @@ class MainActivity : AppCompatActivity() {
 
         return list[int]
     }
+    //for checking if the user won the Lights Out game
+    private fun didUserWin(){
+        var counter = 0
+        var test_box_data:TextView
+        for(item in (0..24)){
+            test_box_data = findViewById<TextView>(getId(item))
+            if(test_box_data.text=="1") counter+=1
+        }
+        if(counter==25){
 
+        }
+
+    }
 //    private fun isPressed(int: Int): Int{
 //        val list: List<Int> = listOf(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
 //        return list[int]
 //    }
 
+    //action to be done to check if adjacent boxes and the clicked box should turn off or on
     private fun decideColor(textView: TextView){
         if(textView.text=="0"){
             textView.setBackgroundColor(Color.DKGRAY)

@@ -5,4 +5,5 @@
     <string name="done">Done</string>
     <string name="response">Please input your name.</string>
     <string name="box_val">0</string>
+    <string name="win_text">You Won!</string>
 </resources>
