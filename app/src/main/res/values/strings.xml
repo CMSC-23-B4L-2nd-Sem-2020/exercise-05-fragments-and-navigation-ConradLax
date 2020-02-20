@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Lights Out</string>
+    <string name="app_title">Lights Out</string>
+    <string name="enter_nickname">Enter nickname</string>
+    <string name="done">Done</string>
+    <string name="response">Please input your name.</string>
+    <string name="box_val">0</string>
+</resources>
