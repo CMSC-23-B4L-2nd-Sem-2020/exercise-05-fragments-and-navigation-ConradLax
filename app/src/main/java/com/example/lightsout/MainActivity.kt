@@ -114,9 +114,11 @@ class MainActivity : AppCompatActivity() {
     private fun decideColor(textView: TextView){
         if(textView.text=="0"){
             textView.setBackgroundColor(Color.DKGRAY)
+            textView.text="1"
         }
         else{
             textView.setBackgroundColor(Color.LTGRAY)
+            textView.text="0"
         }
     }
 
@@ -206,6 +208,73 @@ class MainActivity : AppCompatActivity() {
                 else if(box_data.text == "1"){
                     view.setBackgroundColor(Color.LTGRAY)
                     box_data.text = "0"
+
+                    if(item==0){
+                        var next_box_data = findViewById<TextView>(getId(item+1))
+                        decideColor(next_box_data)
+                        next_box_data = findViewById<TextView>(getId(item+5))
+                        decideColor(next_box_data)
+                    }
+                    else if(item==4){
+                        var next_box_data = findViewById<TextView>(getId(item-1))
+                        decideColor(next_box_data)
+                        next_box_data = findViewById<TextView>(getId(item+5))
+                        decideColor(next_box_data)
+                    }
+                    else if(item==20){
+                        var next_box_data = findViewById<TextView>(getId(item+1))
+                        decideColor(next_box_data)
+                        next_box_data = findViewById<TextView>(getId(item-5))
+                        decideColor(next_box_data)
+                    }
+                    else if(item==24){
+                        var next_box_data = findViewById<TextView>(getId(item-1))
+                        decideColor(next_box_data)
+                        next_box_data = findViewById<TextView>(getId(item-5))
+                        decideColor(next_box_data)
+                    }
+                    else if(item>0 && item<4){
+                        var next_box_data = findViewById<TextView>(getId(item-1))
+                        decideColor(next_box_data)
+                        next_box_data = findViewById<TextView>(getId(item+1))
+                        decideColor(next_box_data)
+                        next_box_data = findViewById<TextView>(getId(item+5))
+                        decideColor(next_box_data)
+                    }
+                    else if(item>20 && item <24){
+                        var next_box_data = findViewById<TextView>(getId(item-1))
+                        decideColor(next_box_data)
+                        next_box_data = findViewById<TextView>(getId(item+1))
+                        decideColor(next_box_data)
+                        next_box_data = findViewById<TextView>(getId(item-5))
+                        decideColor(next_box_data)
+                    }
+                    else if(item%5==0){
+                        var next_box_data = findViewById<TextView>(getId(item-5))
+                        decideColor(next_box_data)
+                        next_box_data = findViewById<TextView>(getId(item+5))
+                        decideColor(next_box_data)
+                        next_box_data = findViewById<TextView>(getId(item+1))
+                        decideColor(next_box_data)
+                    }
+                    else if(item==9 || item==14 || item==19){
+                        var next_box_data = findViewById<TextView>(getId(item-1))
+                        decideColor(next_box_data)
+                        next_box_data = findViewById<TextView>(getId(item-5))
+                        decideColor(next_box_data)
+                        next_box_data = findViewById<TextView>(getId(item+5))
+                        decideColor(next_box_data)
+                    }
+                    else{
+                        var next_box_data = findViewById<TextView>(getId(item-1))
+                        decideColor(next_box_data)
+                        next_box_data = findViewById<TextView>(getId(item-5))
+                        decideColor(next_box_data)
+                        next_box_data = findViewById<TextView>(getId(item+5))
+                        decideColor(next_box_data)
+                        next_box_data = findViewById<TextView>(getId(item+1))
+                        decideColor(next_box_data)
+                    }
                 }
 
             }
