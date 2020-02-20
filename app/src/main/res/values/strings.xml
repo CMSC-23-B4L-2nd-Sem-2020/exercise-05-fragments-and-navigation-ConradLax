@@ -6,4 +6,7 @@
     <string name="response">Please input your name.</string>
     <string name="box_val">0</string>
     <string name="win_text">You Won!</string>
+    <string name="retry">Retry</string>
+    <string name="count">count: 0</string>
+    <string name="count_start">count: </string>
 </resources>

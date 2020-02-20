@@ -12,11 +12,11 @@ import android.widget.EditText
 import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.view.*
+import org.w3c.dom.Text
 
 class MainActivity : AppCompatActivity() {
 
-//    val list: List<Int> = listOf(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
-
+    var clickCounter=0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,18 +28,39 @@ class MainActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.nickname_text).setOnClickListener {
             updateNickname(it)
         }
+
+        findViewById<Button>(R.id.retry_button).setOnClickListener {
+            retryGame()
+        }
+
         setListeners()
+        didUserWin()
     }
+
+    //sets all variables of box to its original / initial "lights off" values
+    private fun retryGame(){
+        var test_data:TextView
+        for(item in (0..24)){
+            test_data = findViewById(getId(item))
+            test_data.setBackgroundColor(Color.LTGRAY)
+            test_data.text="0"
+        }
+    }
+
     //function for showing nickname
     private fun addNickname(view: View) {
         val editText = findViewById<EditText>(R.id.nickname_edit)       //gets a reference for the plaintext/edit text nickname_edit
         val nicknameTextView = findViewById<TextView>(R.id.nickname_text)   //gets a reference for the nickname_text textView
+        val retryBtn: Button = findViewById(R.id.retry_button)
+        val countBtn: TextView = findViewById(R.id.count_text)
 
         if(editText.text.isNotEmpty()){
             nicknameTextView.text = editText.text       //puts the nickname input of user to the nickname_text textView
             editText.visibility = View.GONE             //makes the nickname_edit invisible
             view.visibility = View.GONE                 //makes the button invisible (the view in the parameter will represent the button in the onCreate fxn)
             nicknameTextView.visibility = View.VISIBLE  //shows the nickname input of user
+            retryBtn.visibility = View.VISIBLE
+            countBtn.visibility = View.VISIBLE
 
             var test_data:TextView
             for(item in (0..24)){
@@ -53,6 +74,8 @@ class MainActivity : AppCompatActivity() {
             editText.visibility = View.GONE             //makes the nickname_edit invisible
             view.visibility = View.GONE                 //makes the button invisible (the view in the parameter will represent the button in the onCreate fxn)
             nicknameTextView.visibility = View.VISIBLE  //shows the nickname input of user
+            retryBtn.visibility = View.VISIBLE
+            countBtn.visibility = View.VISIBLE
 
             var test_data:TextView
             for(item in (0..24)) {
@@ -119,6 +142,7 @@ class MainActivity : AppCompatActivity() {
 
         return list[int]
     }
+
     //for checking if the user won the Lights Out game
     private fun didUserWin(){
         var counter = 0
@@ -132,10 +156,6 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-//    private fun isPressed(int: Int): Int{
-//        val list: List<Int> = listOf(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
-//        return list[int]
-//    }
 
     //action to be done to check if adjacent boxes and the clicked box should turn off or on
     private fun decideColor(textView: TextView){
@@ -149,16 +169,28 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
+
     //function that adds an action when a box is pressed
     private fun setListeners(){
         for(item in (0..24)){
             findViewById<TextView>(getId(item)).setOnClickListener{
                 makeColored(it)
+                countClicks()
             }
         }
+
     }
+
+    private fun countClicks(){
+        clickCounter+=1
+        val counterVar = findViewById<TextView>(R.id.count_text)
+        counterVar.text = getString(R.string.count_start).plus(clickCounter.toString())
+    }
+
     //colors the textbox
     private fun makeColored(view: View){
+
         val box_data = findViewById<TextView>(view.id)
         for (item in (0..24)){
             if(getId(item) == view.id){     //uses the values of each box to represent boolean values (if turned on(1) or off(0))
