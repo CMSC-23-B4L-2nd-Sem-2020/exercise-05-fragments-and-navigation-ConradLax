@@ -34,14 +34,21 @@ class MainActivity : AppCompatActivity() {
         }
 
         setListeners()
-        didUserWin()
     }
 
     //sets all variables of box to its original / initial "lights off" values
     private fun retryGame(){
         var test_data:TextView
-        for(item in (0..24)){
+        val win_text = findViewById<TextView>(R.id.win_textbox)
+        val countBtn: TextView = findViewById(R.id.count_text)
+
+        win_text.visibility = View.GONE         //makes the response text for winning invisible
+        countBtn.visibility = View.VISIBLE      //brings back counter
+        clickCounter=0                          //resets counter
+
+        for(item in (0..24)){               //makes each boxes reset
             test_data = findViewById(getId(item))
+            test_data.visibility = View.VISIBLE     //makes the removed boxes when the user won visible again
             test_data.setBackgroundColor(Color.LTGRAY)
             test_data.text="0"
         }
@@ -146,13 +153,21 @@ class MainActivity : AppCompatActivity() {
     //for checking if the user won the Lights Out game
     private fun didUserWin(){
         var counter = 0
-        var test_box_data:TextView
-        for(item in (0..24)){
-            test_box_data = findViewById<TextView>(getId(item))
-            if(test_box_data.text=="1") counter+=1
-        }
-        if(counter==25){
+        var testBoxData:TextView
+        val winText = findViewById<TextView>(R.id.win_textbox)
+        val countBtn: TextView = findViewById(R.id.count_text)
 
+        for(item in (0..24)){                   //counts the lighted boxes
+            testBoxData = findViewById(getId(item))
+            if(testBoxData.text=="1") counter+=1
+        }
+        if(counter==25){                             //checks if counter reached 25, which is what is needed to win
+            winText.visibility = View.VISIBLE        //show response to user ("You won!")
+            countBtn.visibility = View.GONE          //hides counter
+            for (item in (0..24)){              //hides the boxes when showing response
+                testBoxData = findViewById(getId(item))
+                testBoxData.visibility = View.GONE
+            }
         }
 
     }
@@ -177,6 +192,7 @@ class MainActivity : AppCompatActivity() {
             findViewById<TextView>(getId(item)).setOnClickListener{
                 makeColored(it)
                 countClicks()
+                didUserWin()
             }
         }
 
