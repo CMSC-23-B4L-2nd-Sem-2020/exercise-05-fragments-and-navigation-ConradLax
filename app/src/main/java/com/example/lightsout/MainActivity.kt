@@ -41,8 +41,11 @@ class MainActivity : AppCompatActivity() {
         var test_data:TextView
         val win_text = findViewById<TextView>(R.id.win_textbox)
         val countBtn: TextView = findViewById(R.id.count_text)
+        val nicknameTextView = findViewById<TextView>(R.id.nickname_text)   //gets a reference for the nickname_text textView
+
 
         win_text.visibility = View.GONE         //makes the response text for winning invisible
+        nicknameTextView.visibility = View.VISIBLE
         countBtn.visibility = View.VISIBLE      //brings back counter
         clickCounter=0                          //resets counter
 
@@ -156,6 +159,8 @@ class MainActivity : AppCompatActivity() {
         var testBoxData:TextView
         val winText = findViewById<TextView>(R.id.win_textbox)
         val countBtn: TextView = findViewById(R.id.count_text)
+        val nicknameTextView = findViewById<TextView>(R.id.nickname_text)   //gets a reference for the nickname_text textView
+
 
         for(item in (0..24)){                   //counts the lighted boxes
             testBoxData = findViewById(getId(item))
@@ -164,6 +169,7 @@ class MainActivity : AppCompatActivity() {
         if(counter==25){                             //checks if counter reached 25, which is what is needed to win
             winText.visibility = View.VISIBLE        //show response to user ("You won!")
             countBtn.visibility = View.GONE          //hides counter
+            nicknameTextView.visibility = View.GONE
             for (item in (0..24)){              //hides the boxes when showing response
                 testBoxData = findViewById(getId(item))
                 testBoxData.visibility = View.GONE
