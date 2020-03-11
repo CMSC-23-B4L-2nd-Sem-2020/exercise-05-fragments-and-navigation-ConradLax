@@ -1,5 +1,6 @@
 package com.example.lightsout
 
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -19,8 +20,15 @@ class GameboardFragment : Fragment() {
 
     lateinit var binding: FragmentGameboardBinding
     lateinit var winBinding: FragmentWinBinding
+    private var nickname = ""
     var clickCounter=0
 
+//    override fun onAttach(context: Context) {
+//        super.onAttach(context)
+//        arguments?.getString("NICKNAME_VALUE")?.let {
+//            nickname = it
+//        }
+//    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -31,20 +39,25 @@ class GameboardFragment : Fragment() {
         winBinding = DataBindingUtil.inflate<FragmentWinBinding>(inflater,
             R.layout.fragment_win,container,false)
 
+        val arguments = arguments
+        binding.nicknameText.text = arguments?.getString("NICKNAME_VALUE")
 
         //lets user edit nickname
         binding.nicknameText.setOnClickListener { view : View ->
 
             view.visibility = View.GONE             //the textView for the nickname is now invisible because the user is editing the nickname
-
+            binding.nicknameEdit.visibility = View.VISIBLE
+            binding.doneButton.visibility = View.VISIBLE
             //the app now focuses on the editing function of the user
             binding.nicknameEdit.requestFocus()
         }
         //function for done button - to add the new name input
         binding.doneButton.setOnClickListener { view : View ->
             binding.nicknameText.visibility = View.VISIBLE
+            binding.nicknameEdit.visibility = View.GONE
+            binding.doneButton.visibility = View.GONE
             if(binding.nicknameEdit.text.isNotEmpty()){
-                binding.nicknameText.text = binding.nicknameEdit.text       //puts the nickname input of user to the nickname_text textView
+                binding.nicknameText.text = binding.nicknameEdit.text.toString()      //puts the nickname input of user to the nickname_text textView
             }
             else{
                 binding.nicknameText.text = getString(R.string.response)      //puts the error response input to the nickname_text textView if there is no input
@@ -53,10 +66,10 @@ class GameboardFragment : Fragment() {
 
         binding.retryButton.setOnClickListener {
             clickCounter=0                          //resets counter
+            binding.countText.text = getString(R.string.count_start).plus(clickCounter.toString())
             var testData:TextView
             for(item in (0..24)){               //makes each boxes reset
                 testData = getId(item)
-                testData.visibility = View.VISIBLE     //makes the removed boxes when the user won visible again
                 testData.setBackgroundColor(Color.LTGRAY)
                 testData.text="0"
             }
@@ -65,6 +78,7 @@ class GameboardFragment : Fragment() {
         setListeners()
         return binding.root
     }
+
 
 
 

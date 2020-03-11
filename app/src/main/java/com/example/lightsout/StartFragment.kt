@@ -21,6 +21,7 @@ class StartFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         val binding = DataBindingUtil.inflate<FragmentStartBinding>(inflater,
             R.layout.fragment_start,container,false)
 
@@ -29,16 +30,28 @@ class StartFragment : Fragment() {
 
         binding.doneButton3.setOnClickListener { view : View ->
                 if(binding.nicknameEdit3.text.isNotEmpty()){
-                    gameBinding.nicknameText.text = binding.nicknameEdit3.text       //puts the nickname input of user to the nickname_text textView
+                    gameBinding.nicknameText.text = binding.nicknameEdit3.text.toString()       //puts the nickname input of user to the nickname_text textView
+//                    newInstance(binding.nicknameEdit3.text.toString())
                 }
                 else{
-                    gameBinding.nicknameText.text = getString(R.string.response)      //puts the error response input to the nickname_text textView if there is no input
+                    gameBinding.nicknameText.text = getString(R.string.response)    //puts the error response input to the nickname_text textView if there is no input
+//                    newInstance(getString(R.string.response))
                 }
             view.findNavController().navigate(R.id.action_startFragment_to_gameboardFragment)
         }
 
 
+
+
         return binding.root
     }
-
+//    companion object {
+//
+//        @JvmStatic
+//        fun newInstance(nickname: String) = StartFragment().apply {
+//            arguments = Bundle().apply {
+//                putString("NICKNAME_VALUE", nickname)
+//            }
+//        }
+//    }
 }
