@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/navigation"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/startFragment">
+    <fragment
+        android:id="@+id/startFragment"
+        android:name="com.example.lightsout.StartFragment"
+        android:label="StartFragment"
+        tools:layout="@layout/fragment_start" >
+        <action
+            android:id="@+id/action_startFragment_to_gameboardFragment"
+            app:destination="@id/gameboardFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameboardFragment"
+        android:name="com.example.lightsout.GameboardFragment"
+        android:label="GameboardFragment"
+        tools:layout="@layout/fragment_gameboard">
+        <action
+            android:id="@+id/action_gameboardFragment_to_winFragment"
+            app:destination="@id/winFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/winFragment"
+        android:name="com.example.lightsout.WinFragment"
+        android:label="WinFragment"
+        tools:layout="@layout/fragment_win">
+        <action
+            android:id="@+id/action_winFragment_to_startFragment"
+            app:destination="@id/startFragment" />
+    </fragment>
+</navigation>

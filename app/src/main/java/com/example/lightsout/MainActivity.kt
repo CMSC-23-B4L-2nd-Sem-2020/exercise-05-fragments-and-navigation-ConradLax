@@ -10,8 +10,6 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main.view.*
 import org.w3c.dom.Text
 
 class MainActivity : AppCompatActivity() {
@@ -21,19 +19,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        findViewById<Button>(R.id.done_button).setOnClickListener {
-            addNickname(it)
-        }
-        findViewById<TextView>(R.id.nickname_text).setOnClickListener {
-            updateNickname(it)
-        }
-
-        findViewById<Button>(R.id.retry_button).setOnClickListener {
-            retryGame()
-        }
-
-        setListeners()
     }
 
     //sets all variables of box to its original / initial "lights off" values
@@ -66,32 +51,32 @@ class MainActivity : AppCompatActivity() {
 
         if(editText.text.isNotEmpty()){
             nicknameTextView.text = editText.text       //puts the nickname input of user to the nickname_text textView
-            editText.visibility = View.GONE             //makes the nickname_edit invisible
-            view.visibility = View.GONE                 //makes the button invisible (the view in the parameter will represent the button in the onCreate fxn)
-            nicknameTextView.visibility = View.VISIBLE  //shows the nickname input of user
-            retryBtn.visibility = View.VISIBLE
-            countBtn.visibility = View.VISIBLE
+//            editText.visibility = View.GONE             //makes the nickname_edit invisible
+//            view.visibility = View.GONE                 //makes the button invisible (the view in the parameter will represent the button in the onCreate fxn)
+//            nicknameTextView.visibility = View.VISIBLE  //shows the nickname input of user
+//            retryBtn.visibility = View.VISIBLE
+//            countBtn.visibility = View.VISIBLE
 
-            var test_data:TextView
-            for(item in (0..24)){
-                test_data = findViewById<TextView>(getId(item))
-                test_data.visibility = View.VISIBLE
-            }
+//            var test_data:TextView
+//            for(item in (0..24)){
+//                test_data = findViewById<TextView>(getId(item))
+//                test_data.visibility = View.VISIBLE
+//            }
 
         }
         else{
             nicknameTextView.text = getString(R.string.response)      //puts the error response input to the nickname_text textView if there is no input
-            editText.visibility = View.GONE             //makes the nickname_edit invisible
-            view.visibility = View.GONE                 //makes the button invisible (the view in the parameter will represent the button in the onCreate fxn)
-            nicknameTextView.visibility = View.VISIBLE  //shows the nickname input of user
-            retryBtn.visibility = View.VISIBLE
-            countBtn.visibility = View.VISIBLE
+//            editText.visibility = View.GONE             //makes the nickname_edit invisible
+//            view.visibility = View.GONE                 //makes the button invisible (the view in the parameter will represent the button in the onCreate fxn)
+//            nicknameTextView.visibility = View.VISIBLE  //shows the nickname input of user
+//            retryBtn.visibility = View.VISIBLE
+//            countBtn.visibility = View.VISIBLE
 
-            var test_data:TextView
-            for(item in (0..24)) {
-                test_data = findViewById<TextView>(getId(item))
-                test_data.visibility = View.VISIBLE
-            }
+//            var test_data:TextView
+//            for(item in (0..24)) {
+//                test_data = findViewById<TextView>(getId(item))
+//                test_data.visibility = View.VISIBLE
+//            }
         }
 
 
