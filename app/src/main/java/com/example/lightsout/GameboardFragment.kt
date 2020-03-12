@@ -7,7 +7,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.example.lightsout.databinding.FragmentGameboardBinding
@@ -22,6 +24,7 @@ class GameboardFragment : Fragment() {
     lateinit var winBinding: FragmentWinBinding
     private var nickname = ""
     var clickCounter=0
+
 
 //    override fun onAttach(context: Context) {
 //        super.onAttach(context)
@@ -39,8 +42,9 @@ class GameboardFragment : Fragment() {
         winBinding = DataBindingUtil.inflate<FragmentWinBinding>(inflater,
             R.layout.fragment_win,container,false)
 
-        val arguments = arguments
-        binding.nicknameText.text = arguments?.getString("NICKNAME_VALUE")
+
+        binding.nicknameText.text = StartFragment.nicknameData
+        binding.textView.text = StartFragment.nicknameData
 
         //lets user edit nickname
         binding.nicknameText.setOnClickListener { view : View ->
@@ -78,6 +82,17 @@ class GameboardFragment : Fragment() {
         setListeners()
         return binding.root
     }
+
+    //companion object for passing count number to the WinFragment
+    companion object{
+        lateinit var countNum:Number
+        fun getCountNumber(num:Number){
+            countNum = num
+        }
+
+    }
+
+
 
 
 
@@ -128,6 +143,7 @@ class GameboardFragment : Fragment() {
             if(testBoxData.text=="1") counter+=1
         }
         if(counter==25){                             //checks if counter reached 25, which is what is needed to win
+            getCountNumber(clickCounter)
             view?.findNavController()?.navigate(R.id.action_gameboardFragment_to_winFragment)
         }
 

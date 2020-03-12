@@ -48,8 +48,6 @@ class MainActivity : AppCompatActivity() {
     private fun addNickname(view: View) {
         val editText = findViewById<EditText>(R.id.nickname_edit)       //gets a reference for the plaintext/edit text nickname_edit
         val nicknameTextView = findViewById<TextView>(R.id.nickname_text)   //gets a reference for the nickname_text textView
-        val retryBtn: Button = findViewById(R.id.retry_button)
-        val countBtn: TextView = findViewById(R.id.count_text)
 
         if(editText.text.isNotEmpty()){
             nicknameTextView.text = editText.text       //puts the nickname input of user to the nickname_text textView

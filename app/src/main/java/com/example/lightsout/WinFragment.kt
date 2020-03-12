@@ -25,7 +25,7 @@ class WinFragment : Fragment() {
         val gameBinding = DataBindingUtil.inflate<FragmentGameboardBinding>(inflater,
             R.layout.fragment_gameboard,container,false)
 
-        binding.countText2.text = gameBinding.countText.text
+        binding.countText2.text = getString(R.string.count_start).plus(GameboardFragment.countNum.toString())
 
         binding.retryButton3.setOnClickListener {
             view?.findNavController()?.navigate(R.id.action_winFragment_to_startFragment)

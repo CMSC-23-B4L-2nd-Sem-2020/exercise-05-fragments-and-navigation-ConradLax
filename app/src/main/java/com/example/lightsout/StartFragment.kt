@@ -1,6 +1,7 @@
 package com.example.lightsout
 import android.content.Context
 import android.os.Bundle
+import android.provider.ContactsContract
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +17,7 @@ import com.example.lightsout.databinding.FragmentStartBinding
  * A simple [Fragment] subclass.
  */
 class StartFragment : Fragment() {
-
+    var nicknameData:String = "Yo"
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -30,12 +31,12 @@ class StartFragment : Fragment() {
 
         binding.doneButton3.setOnClickListener { view : View ->
                 if(binding.nicknameEdit3.text.isNotEmpty()){
-                    gameBinding.nicknameText.text = binding.nicknameEdit3.text.toString()       //puts the nickname input of user to the nickname_text textView
-//                    newInstance(binding.nicknameEdit3.text.toString())
+//                    gameBinding.nicknameText.text = binding.nicknameEdit3.text.toString()       //puts the nickname input of user to the nickname_text textView
+                    newInstance(binding.nicknameEdit3.text.toString())
                 }
                 else{
-                    gameBinding.nicknameText.text = getString(R.string.response)    //puts the error response input to the nickname_text textView if there is no input
-//                    newInstance(getString(R.string.response))
+//                    gameBinding.nicknameText.text = getString(R.string.response)    //puts the error response input to the nickname_text textView if there is no input
+                    newInstance(getString(R.string.response))
                 }
             view.findNavController().navigate(R.id.action_startFragment_to_gameboardFragment)
         }
@@ -45,13 +46,19 @@ class StartFragment : Fragment() {
 
         return binding.root
     }
-//    companion object {
-//
+    //way for passing nickname to the Game Board Fragment
+    companion object {
+
 //        @JvmStatic
 //        fun newInstance(nickname: String) = StartFragment().apply {
 //            arguments = Bundle().apply {
 //                putString("NICKNAME_VALUE", nickname)
 //            }
 //        }
-//    }
+        lateinit var nicknameData:String
+        fun newInstance(nicknameText:String){
+        nicknameData = nicknameText
+}
+
+    }
 }
